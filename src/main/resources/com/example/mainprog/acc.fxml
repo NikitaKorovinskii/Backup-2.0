@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #005142;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mainprog.proccesingConroller">
+   <children>
+      <AnchorPane layoutY="68.0" prefHeight="331.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
+         <children>
+            <Label layoutX="57.0" layoutY="24.0" text="Машина :">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameCar" layoutX="163.0" layoutY="24.0" text="Bently">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Button fx:id="acceptCarContBut1" layoutX="252.0" layoutY="256.0" mnemonicParsing="false" onAction="#giveCar" style="-fx-background-color: #ffffff; -fx-border-color: #005142;" text="Отдать авто">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="57.0" layoutY="68.0" text="Номер :">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="numCar" layoutX="143.0" layoutY="70.0" text="Р789ГО">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="26.0" text="Клиент :">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="Client" layoutX="467.0" layoutY="26.0" text="Bently">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="70.0" text="Номер :">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="phone" layoutX="467.0" layoutY="70.0" text="Р789ГО">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="134.0" layoutY="149.0">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="113.0" text="Номер ВУ :">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="num_driver" layoutX="493.0" layoutY="113.0" text="Р789ГО">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="57.0" layoutY="113.0" text="Дата окончания:">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="endDate" layoutX="234.0" layoutY="113.0" text="Р789ГО">
+               <font>
+                  <Font name="Century" size="21.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="303.0" layoutY="29.0" text="Заявка 1" textFill="WHITE">
+         <font>
+            <Font name="Century" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateNow" layoutX="595.0" layoutY="32.0" textFill="WHITE">
+         <font>
+            <Font name="Century" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

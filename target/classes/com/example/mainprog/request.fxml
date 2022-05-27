@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="700.0" style="-fx-background-color: #005142;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mainprog.requestController">
+   <children>
+      <Label layoutX="194.0" layoutY="14.0" text="Заявки на выдачу авто" textFill="WHITE">
+         <font>
+            <Font name="Century" size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="dateNow" layoutX="609.0" layoutY="32.0" textFill="WHITE">
+         <font>
+            <Font name="Century" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutX="122.0" layoutY="71.0" prefHeight="326.0" prefWidth="455.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="59.200013756752014" text="Id брони" />
+          <TableColumn fx:id="startDate" prefWidth="91.1999740600586" text="Начало" />
+           <TableColumn fx:id="endDate" prefWidth="75.0" text="Конец" />
+           <TableColumn fx:id="time" prefWidth="102.4000244140625" text="Время приезда" />
+           <TableColumn fx:id="nameCar" prefWidth="127.20001220703125" text="Название машины" />
+        </columns>
+      </TableView>
+      <Button layoutX="242.0" layoutY="402.0" mnemonicParsing="false" onAction="#giveCar" prefHeight="70.0" prefWidth="216.0" text="Выдать авто">
+         <font>
+            <Font name="Century" size="22.0" />
+         </font>
+      </Button>
+      <Button layoutX="38.0" layoutY="20.0" mnemonicParsing="false" onAction="#back" text="&lt;--">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</AnchorPane>
