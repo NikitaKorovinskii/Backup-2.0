@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="AcceptTrip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EventCar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EventCont.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="EventsUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TOAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TripNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TripOpen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
