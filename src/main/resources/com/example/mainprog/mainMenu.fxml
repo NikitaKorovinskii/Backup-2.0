@@ -39,14 +39,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #005142;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mainprog.mainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mainprog.mainMenuController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <children>
       <AnchorPane layoutY="78.0" prefHeight="322.0" prefWidth="700.0" style="-fx-background-color: #FAFAFA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="78.0">
          <children>
-            <Button fx:id="giveCar" layoutX="267.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveCar" prefHeight="44.0" prefWidth="176.0" style="-fx-background-color: #ffff; -fx-border-color: #005142;" text="Отдать авто" AnchorPane.bottomAnchor="172.0">
+            <Button fx:id="giveCar" layoutX="267.0" layoutY="106.0" mnemonicParsing="false" onAction="#giveCar" prefHeight="44.0" prefWidth="176.0" style="-fx-background-color: #ffff; -fx-border-color: #000000;" text="Отдать авто" AnchorPane.bottomAnchor="172.0">
                <font>
                   <Font name="Centaur" size="22.0" />
                </font>
@@ -54,7 +54,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="giveCar1" layoutX="267.0" layoutY="175.0" mnemonicParsing="false" onAction="#acceptCar" prefHeight="44.0" prefWidth="176.0" style="-fx-background-color: #ffff; -fx-border-color: #005142;" text="Принять авто">
+            <Button fx:id="giveCar1" layoutX="267.0" layoutY="175.0" mnemonicParsing="false" onAction="#acceptCar" prefHeight="44.0" prefWidth="176.0" style="-fx-background-color: #ffff; -fx-border-color: #000000;" text="Принять авто">
                <font>
                   <Font name="Centaur" size="22.0" />
                </font>
