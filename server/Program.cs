@@ -1,12 +1,10 @@
-﻿
-using Nancy;
+﻿using Nancy;
 using Nancy.Hosting.Self;
 using Nancy.ModelBinding;
 using NancyNew;
+using Newtonsoft.Json;
 using server;
 using server.BdTable;
-using Server;
-using System.Linq;
 
 class Program
 {
@@ -27,7 +25,7 @@ class Program
             Console.ReadLine();
             /*SMTPSender n = new SMTPSender();
             n.SendUsual();*/
-          
+
         }
     }
 }
@@ -38,41 +36,11 @@ public class HomeModule : NancyModule
     public string FIO;
     public HomeModule()
     {
-       Auth human = new Auth();
-       human = new() { Login = "Anthony" };
-        Get("/cars", args => 
+        int idClient = 0;
+        Post("/ClientAdd", (x) =>
         {
-            using (work100013Context db = new())
-            {
-                List<Car> car = db.Cars.ToList();
-            }
-        });
-        Get("/", args => "Олег лучший парень на деревне");
-        Get("/SayHello", args => $"Hello {this.Request.Query["name"]}");
-        Get("/SayHello2/{name}", args => $"Hello {args.name}");
-        Get("/Human", args => $"{human.Login}");
-        Post("/humanity", (x) =>
-        {
-            x = this.Bind<Client>();
+            x = this.Bind<ChildrenClient>();
 
-            var res = new Response();
-
-            res.StatusCode = (HttpStatusCode)200;
-            res.Headers["Access-Control-Allow-Origin"] = "*";
-            res.Headers["Access-Control-Allow-Method"] = "POST";
-            res.Headers["Access-Control-Expose-Headers"] = "Human";
-            res.Headers["Content-Type"] = "application/json";
-            res.Headers["Human"] = System.Text.Json.JsonSerializer.Serialize(human);
-            Console.WriteLine(x.Login);
-
-            Console.WriteLine(x.Password);
-            return res;
-        });
-        Post("/authorization", (x) =>
-        {
-           
-            x = this.Bind<Client>();
-            
 
             var res = new Response();
 
@@ -85,14 +53,27 @@ public class HomeModule : NancyModule
                     Name = x.Name,
                     LastName = x.LastName,
                     MiddleName = x.MiddleName,
-                    DataOfBith = x.DataOfBith,
+                    DataOfBith = DateOnly.Parse(x.DataOfBith),
                     Number = x.Number,
                     Passport = x.Passport,
                     NumberDriver = x.NumberDriver,
                 };
                 db.Clients.Add(client);
                 db.SaveChanges();
-                var list = db.Clients.Where(p => p.Passport == pasID);
+                string pas = x.Passport;
+                var list = db.Clients.Where(p => p.Passport == pas);
+                foreach (var u in list)
+                {
+                    idClient = u.IdClient;
+                };
+                Wallet wallet = new Wallet
+                {
+                    Sum = 0,
+                    IdClient = idClient
+                };
+                db.Wallets.Add(wallet);
+                db.SaveChanges();
+                var list1 = db.Clients.Where(p => p.Passport == pas);
                 foreach (var u in list)
                 {
                     idClient = u.IdClient;
@@ -107,20 +88,16 @@ public class HomeModule : NancyModule
                 };
                 db.Auths.Add(auth);
                 db.SaveChanges();
-                Console.WriteLine("Efdmspafm");
             }
+
             res.StatusCode = (HttpStatusCode)200;
             res.Headers["Access-Control-Allow-Origin"] = "*";
             res.Headers["Access-Control-Allow-Method"] = "POST";
             res.Headers["Access-Control-Expose-Headers"] = "Human";
             res.Headers["Content-Type"] = "application/json";
-            res.Headers["Human"] = System.Text.Json.JsonSerializer.Serialize(human);
-
-           
-          
             return res;
         });
-        Post("/auth", (x) =>
+        Post("/exect", (x) =>
         {
             x = this.Bind<Auth>();
             //TODO: Add JWT
@@ -129,9 +106,10 @@ public class HomeModule : NancyModule
             int x1 = 0;
             using (work100013Context db = new())
             {
-               var acc1 = db.Auths.Where(l => l.Login == login && l.Password == password);
-                foreach(var u in acc1)
+                var acc1 = db.Auths.Where(l => l.Login == login && l.Password == password);
+                foreach (var u in acc1)
                 {
+                    idClient = Int32.Parse(u.IdClient.ToString());
                     if (acc1 != null)
                     {
                         x1++;
@@ -153,7 +131,7 @@ public class HomeModule : NancyModule
                 response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
                 response.Headers["Content-Type"] = "application/json";
 
-                response.Headers["Account"] = System.Text.Json.JsonSerializer.Serialize(x1);
+                response.Headers["Account"] = System.Text.Json.JsonSerializer.Serialize(x);
                 return response;
             }
             else
@@ -162,5 +140,55 @@ public class HomeModule : NancyModule
                 return response;
             }
         });
+        string x21;
+        Get("/client", (x21) =>
+            {
+                Response response = new();
+                var xs21 = "";
+                using (work100013Context db = new())
+                {
+                    List<Auth> auths = //idClient не запоминает
+                    db.Auths.Where(p => p.IdClient == 1).ToList();
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Headers["Access-Control-Allow-Origin"] = "*";
+                    response.Headers["Access-Control-Allow-Method"] = "Get";
+
+                    response.Headers["Auth"] = System.Text.Json.JsonSerializer.Serialize(auths);
+                    return response;
+                }
+
+
+            });
+        Get("/cars", (x21) =>
+        {
+            Response response = new();
+            using (work100013Context db = new())
+            {
+                var cars = from Car in db.Cars
+                           join Specification in db.Specifications on Car.IdCar equals Specification.IdCar
+                           select new
+                           {
+                               IdCar = Car.IdCar,
+                               NameCar = Car.NameCar,
+                               PriceCar = Car.PriceCar,
+                               BodyType = Car.BodyType,
+                               CountSeats = Car.CountSeats,
+                               Transmission = Specification.Transmission,
+                               ImgCar = Car.ImgCar,
+                               Horsepower = Specification.Horsepower,
+                               Engine = Specification.Engine,
+                           };
+                response.StatusCode = HttpStatusCode.OK;
+                response.Headers["Access-Control-Allow-Origin"] = "*";
+                response.Headers["Access-Control-Allow-Method"] = "Get";
+                response.Headers["Cars"] = System.Text.Json.JsonSerializer.Serialize(cars);
+                response.Headers["Access-Control-Expose-Headers"] = "Cars";
+
+                return response;
+            }
+
+
+        });
+
     }
 }

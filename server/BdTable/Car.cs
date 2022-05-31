@@ -21,6 +21,7 @@ namespace server.BdTable
         public int CountSeats { get; set; }
         public bool StatusBooking { get; set; }
         public bool StatusIssuance { get; set; }
+        public string? ImgCar { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<Specification> Specifications { get; set; }
