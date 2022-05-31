@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using carrr.TableBd;
+using System.Data;
 
 namespace carrr
 {
@@ -15,16 +16,24 @@ namespace carrr
             priceTrip.Visible = false;
             using (work100013Context db = new())
             {
-                var list = db.Cars;
-                foreach (var car in list)
+                try
                 {
-                    comboBox1.Items.Add(car.NameCar);
+                    var list = db.Cars;
+                    foreach (var car in list)
+                    {
+                        comboBox1.Items.Add(car.NameCar);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             }
             startDate.MinDate = DateTime.Now;
             endDate.MinDate = DateTime.Now.AddDays(1);
-            
-           
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -36,60 +45,85 @@ namespace carrr
 
         private void contBTN_Click(object sender, EventArgs e)
         {
-            Scence2.Visible = true;
-            Scence1.Visible = false;
-            using (work100013Context db = new())
+            if (lastName.Text!="" && name.Text != "" && middleName.Text != "" && passport.Text != "" && driverNum.Text != "" && phone.Text != "" && dateOfBith.Text != "" )
             {
-                Client client = new Client
+                Scence2.Visible = true;
+                Scence1.Visible = false;
+                using (work100013Context db = new())
                 {
-                    LastName = lastName.Text,
-                    Name = name.Text,
-                    MiddleName = middleName.Text,
-                    Passport = passport.Text,
-                    NumberDriver = driverNum.Text,
-                    Number = phone.Text,
-                    DataOfBith = DateOnly.Parse(dateOfBith.Text) // Исправить ошибку и при добавление поездки менять статусы у машины оба на true.
-                };
+                    try
+                    {
+                        Client client = new Client
+                        {
+                            LastName = lastName.Text,
+                            Name = name.Text,
+                            MiddleName = middleName.Text,
+                            Passport = passport.Text,
+                            NumberDriver = driverNum.Text,
+                            Number = phone.Text,
+                            DataOfBith = DateOnly.Parse(dateOfBith.Text) // Исправить ошибку и при добавление поездки менять статусы у машины оба на true.
+                        };
 
-                db.Clients.Add(client);
-                db.SaveChanges();
+                        db.Clients.Add(client);
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
             }
+            else
+            {
+                MessageBox.Show("Заполните все поля");
+            }
+
 
 
         }
 
         private void endBTN_Click(object sender, EventArgs e)
         {
-           
+            
             using (work100013Context db = new())
             {
-
-                var cars = db.Cars.Where(p => p.NameCar == comboBox1.SelectedItem);
-                foreach (var u in cars)
+                try
                 {
-                    carid = u.IdCar;
-                    oneDayPriceCar = u.PriceCar;
-                    u.StatusBooking = true;
-                    u.StatusIssuance = true;
+                    var cars = db.Cars.Where(p => p.NameCar == comboBox1.SelectedItem);
+                    foreach (var u in cars)
+                    {
+                        carid = u.IdCar;
+                        oneDayPriceCar = u.PriceCar;
+                        u.StatusBooking = true;
+                        u.StatusIssuance = true;
+
+                    }
+
+                    var clients = db.Clients.Where(p => p.Passport == passport.Text);
+                    foreach (var u in clients)
+                    {
+                        clientId = u.IdClient;
+                    }
+
+
+                    Trip trip = new Trip
+                    {
+                        StartDate = DateOnly.Parse(startDate.Text),
+                        EndDate = DateOnly.Parse(endDate.Text),
+                        IdCar = carid,
+                        IdClient = clientId,
+                        StatusTrip=true
+                    };
+                    db.Trips.Add(trip);
+                    db.SaveChanges();
 
                 }
-
-                var clients = db.Clients.Where(p => p.Passport == passport.Text);
-                foreach (var u in clients)
+                catch (Exception ex)
                 {
-                    clientId = u.IdClient;
+                    MessageBox.Show(ex.Message);
                 }
 
-
-                Trip trip = new Trip
-                {
-                    StartDate = DateOnly.Parse(startDate.Text),
-                    EndDate = DateOnly.Parse(endDate.Text),
-                    IdCar = carid,
-                    IdClient = clientId
-                };
-                db.Trips.Add(trip);
-                db.SaveChanges();
 
             }
             Hide();
@@ -101,29 +135,37 @@ namespace carrr
         {
             using (work100013Context db = new())
             {
-
-                var cars = db.Cars.Where(p => p.NameCar == comboBox1.SelectedItem);
-                foreach (var u in cars)
+                try
                 {
+                    var cars = db.Cars.Where(p => p.NameCar == comboBox1.SelectedItem);
+                    foreach (var u in cars)
+                    {
 
-                    oneDayPriceCar = u.PriceCar;
+                        oneDayPriceCar = u.PriceCar;
 
+                    }
+                    priceTrip.Visible = true;
+                    label6.Visible = true;
+                    var countMonth = (endDate.Value.Month - startDate.Value.Month) * 30;
+                    var countDay = endDate.Value.Day - startDate.Value.Day;
+                    double x = 0;
+                    if (countMonth == 0 && countDay == 1)
+                    {
+                        x = ((countDay + countMonth) * oneDayPriceCar);
+                    }
+                    else
+                    {
+                        x = ((countDay + countMonth) * oneDayPriceCar) * 0.8;
+                    }
+                    priceTrip.Text = x.ToString() + " ₽";
+                    PriceCount.Visible = false;
                 }
-                priceTrip.Visible = true;
-                label6.Visible = true;
-                var countMonth = (endDate.Value.Month - startDate.Value.Month) * 30;
-                var countDay = endDate.Value.Day - startDate.Value.Day;
-                double x = 0;
-                if (countMonth == 0 && countDay == 1)
+                catch (Exception ex)
                 {
-                    x = ((countDay + countMonth) * oneDayPriceCar);
+                    MessageBox.Show(ex.Message);
                 }
-                else
-                {
-                    x = ((countDay + countMonth) * oneDayPriceCar) * 0.8;
-                }
-                priceTrip.Text = x.ToString() + " ₽";
-                PriceCount.Visible = false;
+
+
             }
 
         }

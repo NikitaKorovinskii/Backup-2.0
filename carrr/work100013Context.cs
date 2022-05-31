@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using carrr.TableBd;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -173,9 +174,9 @@ namespace carrr
 
                 entity.Property(e => e.IdSpecifications).HasColumnName("id_specifications");
 
-                entity.Property(e => e.EngineСapacity)
+                entity.Property(e => e.Engine)
                     .HasPrecision(2, 1)
-                    .HasColumnName("engine_Сapacity");
+                    .HasColumnName("engine");
 
                 entity.Property(e => e.Horsepower).HasColumnName("horsepower");
 
@@ -231,6 +232,8 @@ namespace carrr
                 entity.Property(e => e.IdClient).HasColumnName("id_client");
 
                 entity.Property(e => e.StartDate).HasColumnName("start_date");
+
+                entity.Property(e => e.StatusTrip).HasColumnName("status_trip");
 
                 entity.HasOne(d => d.IdCarNavigation)
                     .WithMany(p => p.Trips)

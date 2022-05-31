@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace carrr
+namespace carrr.TableBd
 {
     public partial class Auth
     {

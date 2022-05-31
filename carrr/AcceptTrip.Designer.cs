@@ -51,6 +51,7 @@
             this.number = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -236,7 +237,7 @@
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Location = new System.Drawing.Point(35, 17);
-            this.button2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(56, 35);
             this.button2.TabIndex = 15;
@@ -316,12 +317,23 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "№";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(121, 351);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(154, 76);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Создать отчёт";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // AcceptTrip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1066, 692);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.number);
@@ -378,5 +390,6 @@
         private Label number;
         private Label label10;
         private Label label11;
+        private Button button1;
     }
 }

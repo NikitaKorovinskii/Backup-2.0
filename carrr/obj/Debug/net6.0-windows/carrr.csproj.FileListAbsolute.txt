@@ -46,3 +46,5 @@ D:\Studies\Архитектура ИС\carrr\carrr\bin\Debug\net6.0-windows\NPOI
 D:\Studies\Архитектура ИС\carrr\carrr\bin\Debug\net6.0-windows\NPOI.dll
 D:\Studies\Архитектура ИС\carrr\carrr\bin\Debug\net6.0-windows\BouncyCastle.Crypto.dll
 D:\Studies\Архитектура ИС\carrr\carrr\bin\Debug\net6.0-windows\ICSharpCode.SharpZipLib.dll
+D:\Studies\Архитектура ИС\carrr\carrr\obj\Debug\net6.0-windows\Interop.Microsoft.Office.Interop.Excel.dll
+D:\Studies\Архитектура ИС\carrr\carrr\obj\Debug\net6.0-windows\carrr.csproj.ResolveComReference.cache

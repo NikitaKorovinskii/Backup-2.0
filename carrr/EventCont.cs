@@ -24,21 +24,29 @@ namespace carrr
                                               //Добавляем строку, указывая значения колонок поочереди слева направо
             using (work100013Context db = new())
             {
-                var cars = from Event in db.Events
-                           join Car in db.Cars on Event.IdCar equals Car.IdCar
-                           where Event.Sum == null
-                           select new
-                           {
-                               idEvent = Event.IdEvents,
-                               decription = Event.Description,
-                               carName = Car.NameCar,
-                               numCar = Car.NumberCar
-                           };
-                foreach (var u in cars)
+                try
                 {
-                    table.Rows.Add($"{u.idEvent} ", $"{ u.decription}", $"{ u.carName}", $"{ u.numCar}");
+                    var cars = from Event in db.Events
+                               join Car in db.Cars on Event.IdCar equals Car.IdCar
+                               where Event.Sum == null
+                               select new
+                               {
+                                   idEvent = Event.IdEvents,
+                                   decription = Event.Description,
+                                   carName = Car.NameCar,
+                                   numCar = Car.NumberCar
+                               };
+                    foreach (var u in cars)
+                    {
+                        table.Rows.Add($"{u.idEvent} ", $"{u.decription}", $"{u.carName}", $"{u.numCar}");
 
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+               
 
             }
 

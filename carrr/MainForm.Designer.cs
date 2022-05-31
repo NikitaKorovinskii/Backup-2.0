@@ -39,10 +39,10 @@
             this.openTrip.BackColor = System.Drawing.Color.White;
             this.openTrip.Cursor = System.Windows.Forms.Cursors.Hand;
             this.openTrip.Font = new System.Drawing.Font("Centaur", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.openTrip.Location = new System.Drawing.Point(297, 86);
-            this.openTrip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openTrip.Location = new System.Drawing.Point(339, 115);
+            this.openTrip.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.openTrip.Name = "openTrip";
-            this.openTrip.Size = new System.Drawing.Size(312, 80);
+            this.openTrip.Size = new System.Drawing.Size(357, 107);
             this.openTrip.TabIndex = 0;
             this.openTrip.Text = "Открытые заявки";
             this.openTrip.UseVisualStyleBackColor = false;
@@ -52,10 +52,10 @@
             // 
             this.eventCar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.eventCar.Font = new System.Drawing.Font("Centaur", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.eventCar.Location = new System.Drawing.Point(297, 214);
-            this.eventCar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.eventCar.Location = new System.Drawing.Point(339, 285);
+            this.eventCar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.eventCar.Name = "eventCar";
-            this.eventCar.Size = new System.Drawing.Size(312, 80);
+            this.eventCar.Size = new System.Drawing.Size(357, 107);
             this.eventCar.TabIndex = 1;
             this.eventCar.Text = "Ремонт авто";
             this.eventCar.UseVisualStyleBackColor = true;
@@ -65,10 +65,10 @@
             // 
             this.newTrip.Cursor = System.Windows.Forms.Cursors.Hand;
             this.newTrip.Font = new System.Drawing.Font("Centaur", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.newTrip.Location = new System.Drawing.Point(297, 341);
-            this.newTrip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.newTrip.Location = new System.Drawing.Point(339, 455);
+            this.newTrip.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.newTrip.Name = "newTrip";
-            this.newTrip.Size = new System.Drawing.Size(312, 80);
+            this.newTrip.Size = new System.Drawing.Size(357, 107);
             this.newTrip.TabIndex = 2;
             this.newTrip.Text = "Локальная заявка";
             this.newTrip.UseVisualStyleBackColor = true;
@@ -76,15 +76,15 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.ClientSize = new System.Drawing.Size(914, 532);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(1045, 709);
             this.Controls.Add(this.newTrip);
             this.Controls.Add(this.eventCar);
             this.Controls.Add(this.openTrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главный экран";

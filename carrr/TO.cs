@@ -21,11 +21,19 @@ namespace carrr
         {
             using (work100013Context db = new work100013Context())
             {
-                var car = db.Cars.OrderBy(p=>p.IdCar);
-                foreach (var c in car)
+                try
                 {
-                    table.Rows.Add($"{c.IdCar}", $"{c.NameCar}", $"{c.NumberCar}", $"{c.BodyType}");
+                    var car = db.Cars.OrderBy(p => p.IdCar);
+                    foreach (var c in car)
+                    {
+                        table.Rows.Add($"{c.IdCar}", $"{c.NameCar}", $"{c.NumberCar}", $"{c.BodyType}");
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
         }
 

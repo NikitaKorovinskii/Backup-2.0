@@ -12,7 +12,7 @@ namespace carrr
         }
 
 
-        private void TripOpen_Load(object sender, EventArgs e)
+        private async void TripOpen_Load(object sender, EventArgs e)
         {
 
 
@@ -22,24 +22,32 @@ namespace carrr
                                               //Добавляем строку, указывая значения колонок поочереди слева направо
             using (work100013Context db = new())
             {
-                var trips = from Trip in db.Trips
-                            join Client in db.Clients on Trip.IdClient equals Client.IdClient
-                            join Car in db.Cars on Trip.IdCar equals Car.IdCar
-                            where Car.StatusBooking == true && Car.StatusIssuance == true
-                            select new
-                            {
-                                idTrip = Trip.IdTrip,
-                                startDate = Trip.StartDate,
-                                endDate = Trip.EndDate,
-                                name = Client.Name,
-                                carName = Car.NameCar
-                            };
-                foreach (var u in trips)
+                try
                 {
+                    var trips =  from Trip in db.Trips
+                                join Client in db.Clients on Trip.IdClient equals Client.IdClient
+                                       join Car in db.Cars on Trip.IdCar equals Car.IdCar
+                                where Trip.StatusTrip==true
+                                select new
+                                {
+                                    idTrip = Trip.IdTrip,
+                                    startDate = Trip.StartDate,
+                                    endDate = Trip.EndDate,
+                                    name = Client.Name,
+                                    carName = Car.NameCar
+                                };
+                    foreach (var u in trips)
+                    {
 
-                    table.Rows.Add($"{u.idTrip} ", $"{ u.startDate}", $"{ u.endDate}", $"{ u.name}", $"{ u.carName}");
+                        table.Rows.Add($"{u.idTrip} ", $"{u.startDate}", $"{u.endDate}", $"{u.name}", $"{u.carName}");
 
+                    }
                 }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+               
 
             }
         }

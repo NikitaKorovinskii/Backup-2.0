@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace carrr
+namespace carrr.TableBd
 {
     public partial class Trip
     {
@@ -15,6 +15,7 @@ namespace carrr
         public DateOnly EndDate { get; set; }
         public int? IdCar { get; set; }
         public int? IdClient { get; set; }
+        public bool? StatusTrip { get; set; }
 
         public virtual Car? IdCarNavigation { get; set; }
         public virtual Client? IdClientNavigation { get; set; }

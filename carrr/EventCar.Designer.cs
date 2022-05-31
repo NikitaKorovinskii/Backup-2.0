@@ -38,10 +38,10 @@
             // 
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(74, 52);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Location = new System.Drawing.Point(85, 69);
+            this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(55, 27);
+            this.button1.Size = new System.Drawing.Size(63, 36);
             this.button1.TabIndex = 1;
             this.button1.Text = "<--";
             this.button1.UseVisualStyleBackColor = false;
@@ -50,10 +50,10 @@
             // repair
             // 
             this.repair.Font = new System.Drawing.Font("Times New Roman", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.repair.Location = new System.Drawing.Point(353, 110);
-            this.repair.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.repair.Location = new System.Drawing.Point(403, 147);
+            this.repair.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.repair.Name = "repair";
-            this.repair.Size = new System.Drawing.Size(277, 101);
+            this.repair.Size = new System.Drawing.Size(317, 135);
             this.repair.TabIndex = 2;
             this.repair.Text = "Ремонт";
             this.repair.UseVisualStyleBackColor = true;
@@ -62,10 +62,10 @@
             // Technical
             // 
             this.Technical.Font = new System.Drawing.Font("Times New Roman", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Technical.Location = new System.Drawing.Point(353, 262);
-            this.Technical.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Technical.Location = new System.Drawing.Point(403, 349);
+            this.Technical.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Technical.Name = "Technical";
-            this.Technical.Size = new System.Drawing.Size(277, 101);
+            this.Technical.Size = new System.Drawing.Size(317, 135);
             this.Technical.TabIndex = 3;
             this.Technical.Text = "ТО";
             this.Technical.UseVisualStyleBackColor = true;
@@ -73,15 +73,15 @@
             // 
             // EventCar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.ClientSize = new System.Drawing.Size(933, 519);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(1066, 692);
             this.Controls.Add(this.Technical);
             this.Controls.Add(this.repair);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "EventCar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "События с машиной";

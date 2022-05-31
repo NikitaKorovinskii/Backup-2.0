@@ -1,44 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 
 namespace carrr
 {
     public partial class EventsUpdate : Form
     {
         int idEventCar;
-        public EventsUpdate(string? idEvent )
+        public EventsUpdate(string? idEvent)
         {
             idEventCar = Int32.Parse(idEvent);
             InitializeComponent();
             using (work100013Context db = new())
             {
-                var cars = from Event in db.Events
-                           join Car in db.Cars on Event.IdCar equals Car.IdCar
-                           where Event.IdEvents == Int32.Parse(idEvent)
-                           select new
-                           {
-                               idEvent = Event.IdEvents,
-                               decription = Event.Description,
-                               carName = Car.NameCar,
-                               numCar = Car.NumberCar,
-
-                           };
-                foreach (var u in cars)
+                try
                 {
-                    idEvents.Text = u.idEvent.ToString();
-                    description.Text = u.decription.ToString();
-                    carName.Text = u.carName.ToString();
-                    numCar.Text = u.numCar.ToString();
+                    var cars = from Event in db.Events
+                               join Car in db.Cars on Event.IdCar equals Car.IdCar
+                               where Event.IdEvents == Int32.Parse(idEvent)
+                               select new
+                               {
+                                   idEvent = Event.IdEvents,
+                                   decription = Event.Description,
+                                   carName = Car.NameCar,
+                                   numCar = Car.NumberCar,
+
+                               };
+                    foreach (var u in cars)
+                    {
+                        idEvents.Text = u.idEvent.ToString();
+                        description.Text = u.decription.ToString();
+                        carName.Text = u.carName.ToString();
+                        numCar.Text = u.numCar.ToString();
 
 
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
 
             }
         }
@@ -52,19 +52,37 @@ namespace carrr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (work100013Context db = new())
+
+            if (textBox1.Text != "" && textBox2.Text != "")
             {
-                var cars = db.Events.Where(p => p.IdEvents == idEventCar);
-                foreach (var car in cars)
+                using (work100013Context db = new())
                 {
-                    car.Sum = Int32.Parse(textBox1.Text);
-                    car.DataEvent = DateOnly.Parse(textBox2.Text);
+                    try
+                    {
+                        var cars = db.Events.Where(p => p.IdEvents == idEventCar);
+                        foreach (var car in cars)
+                        {
+                            car.Sum = Int32.Parse(textBox1.Text);
+                            car.DataEvent = DateOnly.Parse(textBox2.Text);
+                        }
+                        db.SaveChanges();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
                 }
-                db.SaveChanges();
+                Hide();
+                MainForm eventCar = new MainForm();
+                eventCar.Show();
             }
-            Hide();
-            MainForm eventCar = new MainForm();
-            eventCar.Show();
+            else
+            {
+                MessageBox.Show("Заполните все поля");
+            }
+
         }
 
     }

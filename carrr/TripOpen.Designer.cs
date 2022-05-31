@@ -51,8 +51,9 @@
             this.Column3,
             this.Column5,
             this.Column4});
+            this.table.GridColor = System.Drawing.Color.White;
             this.table.Location = new System.Drawing.Point(96, 44);
-            this.table.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.table.Margin = new System.Windows.Forms.Padding(5);
             this.table.Name = "table";
             this.table.ReadOnly = true;
             this.table.RowHeadersWidth = 51;
@@ -106,7 +107,7 @@
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Location = new System.Drawing.Point(31, 19);
-            this.button2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(56, 35);
             this.button2.TabIndex = 3;
@@ -118,12 +119,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(855, 499);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.table);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "TripOpen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Открытые заявки";
