@@ -21,7 +21,7 @@ namespace Server
             // отправитель - устанавливаем адрес и отображаемое в письме имя
             from = new MailAddress("nikita19999lol@gmail.com", "Привет");
             // кому отправляем
-           to = new MailAddress("starkaw.bin@gmail.com");
+           to = new MailAddress("nikita19999lol@gmail.com");
             // создаем объект сообщения
             message = new MailMessage(from, to);
             // тема письма

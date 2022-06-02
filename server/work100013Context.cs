@@ -150,9 +150,9 @@ namespace server
 
             modelBuilder.Entity<HistoryWallet>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("history_wallet");
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DateOperation).HasColumnName("date_operation");
 
