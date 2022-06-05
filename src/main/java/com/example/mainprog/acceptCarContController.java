@@ -109,6 +109,7 @@ public class acceptCarContController {
         String req;
 
         try {
+
             req = "select Car.name_Car,number_Car,Client.name,middle_Name, Client.number  from trip\n" +
                     "                                 join car on Car.id_Car=trip.id_Car join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
                     "                                       join client on trip.id_Client=Client.id_Client\n" +
@@ -120,6 +121,8 @@ public class acceptCarContController {
                 phone.setText("8" + rs.getString("number"));
                 Client.setText((rs.getString("name") + " " + rs.getString("middle_Name")));
             }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

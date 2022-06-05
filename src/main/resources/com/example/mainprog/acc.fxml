@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mainprog.proccesingConroller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="830.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.mainprog.proccesingConroller">
    <children>
-      <AnchorPane layoutY="68.0" prefHeight="331.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
+      <AnchorPane layoutY="68.0" prefHeight="331.0" prefWidth="830.0" style="-fx-background-color: #fafafa;">
          <children>
-            <Label layoutX="57.0" layoutY="24.0" text="Машина :">
+            <Label layoutX="77.0" layoutY="32.0" text="Машина :">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="nameCar" layoutX="163.0" layoutY="24.0" text="Bently">
+            <Label fx:id="nameCar" layoutX="201.0" layoutY="32.0" text="Bently">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Button fx:id="acceptCarContBut1" layoutX="252.0" layoutY="256.0" mnemonicParsing="false" onAction="#giveCar" style="-fx-background-color: #ffffff; -fx-border-color: #005142;" text="Отдать авто">
+            <Button fx:id="acceptCarContBut1" layoutX="333.0" layoutY="264.0" mnemonicParsing="false" onAction="#giveCar" style="-fx-background-color: #ffffff; -fx-border-color: #005142;" text="Отдать авто">
                <font>
                   <Font size="24.0" />
                </font>
@@ -28,64 +28,64 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="57.0" layoutY="68.0" text="Номер :">
+            <Label layoutX="77.0" layoutY="78.0" text="Номер :">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="numCar" layoutX="143.0" layoutY="70.0" text="Р789ГО">
+            <Label fx:id="numCar" layoutX="194.0" layoutY="78.0" text="Р789ГО">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="361.0" layoutY="26.0" text="Клиент :">
+            <Label layoutX="430.0" layoutY="34.0" text="Клиент :">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="Client" layoutX="467.0" layoutY="26.0" text="Bently">
+            <Label fx:id="Client" layoutX="518.0" layoutY="34.0" text="Bently">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="361.0" layoutY="70.0" text="Номер :">
+            <Label layoutX="430.0" layoutY="78.0" text="Номер :">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="phone" layoutX="467.0" layoutY="70.0" text="Р789ГО">
+            <Label fx:id="phone" layoutX="518.0" layoutY="78.0" text="Р789ГО">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="134.0" layoutY="149.0">
+            <Label layoutX="234.0" layoutY="157.0">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="361.0" layoutY="113.0" text="Номер ВУ :">
+            <Label layoutX="430.0" layoutY="121.0" text="Номер ВУ :">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="num_driver" layoutX="493.0" layoutY="113.0" text="Р789ГО">
+            <Label fx:id="num_driver" layoutX="557.0" layoutY="121.0" text="Р789ГО">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="57.0" layoutY="113.0" text="Дата окончания:">
+            <Label layoutX="77.0" layoutY="121.0" text="Дата окончания:">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
-            <Label fx:id="endDate" layoutX="234.0" layoutY="113.0" text="Р789ГО">
+            <Label fx:id="endDate" layoutX="273.0" layoutY="121.0" text="Р789ГО">
                <font>
                   <Font name="Century" size="21.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="303.0" layoutY="29.0" text="Заявка 1" textFill="WHITE">
+      <Label layoutX="368.0" layoutY="30.0" text="Заявка 1" textFill="WHITE">
          <font>
             <Font name="Century" size="22.0" />
          </font>
