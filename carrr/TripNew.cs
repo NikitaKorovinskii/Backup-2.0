@@ -1,4 +1,5 @@
-﻿using carrr.TableBd;
+﻿
+using carrr.TableBd;
 using System.Data;
 
 namespace carrr
@@ -8,6 +9,7 @@ namespace carrr
         int carid;
         int clientId;
         int oneDayPriceCar;
+        double price = 0;
         public TripNew()
         {
             InitializeComponent();
@@ -45,7 +47,8 @@ namespace carrr
 
         private void contBTN_Click(object sender, EventArgs e)
         {
-            if (lastName.Text!="" && name.Text != "" && middleName.Text != "" && passport.Text != "" && driverNum.Text != "" && phone.Text != "" && dateOfBith.Text != "" )
+
+            if (lastName.Text != "" && name.Text != "" && middleName.Text != "" && passport.Text != "" && driverNum.Text != "" && phone.Text != "" && dateOfBith.Text != "")
             {
                 Scence2.Visible = true;
                 Scence1.Visible = false;
@@ -66,6 +69,19 @@ namespace carrr
 
                         db.Clients.Add(client);
                         db.SaveChanges();
+
+                        var list = db.Clients.Where(p => p.Passport == passport.Text);
+                        foreach (var u in list)
+                        {
+                            clientId = u.IdClient;
+                        }
+                        Wallet wallet = new Wallet
+                        {
+                            Sum = 0,
+                            IdClient = clientId
+                        };
+                        db.Wallets.Add(wallet);
+                        db.SaveChanges();
                     }
                     catch (Exception ex)
                     {
@@ -85,7 +101,7 @@ namespace carrr
 
         private void endBTN_Click(object sender, EventArgs e)
         {
-            
+
             using (work100013Context db = new())
             {
                 try
@@ -99,13 +115,31 @@ namespace carrr
                         u.StatusIssuance = true;
 
                     }
-
-                    var clients = db.Clients.Where(p => p.Passport == passport.Text);
-                    foreach (var u in clients)
+                    int Idwallet = 0;
+                    var list = db.Wallets.Where(p => p.IdClient == clientId);
+                    foreach (var wallet in list)
                     {
-                        clientId = u.IdClient;
+                        Idwallet = wallet.IdWallet;
                     }
+                    HistoryWallet historyWallet = new HistoryWallet
+                    {
+                        DateOperation = DateOnly.FromDateTime(DateTime.Now),
+                        TimeOperation = DateTimeOffset.Now,
+                        Sum = (int)price,
+                        IdWallet = Idwallet
+                    };
+                    db.HistoryWallets.Add(historyWallet);
+                    db.SaveChanges();
 
+                    HistoryWallet wallet1 = new HistoryWallet
+                    {
+                        DateOperation = DateOnly.FromDateTime(DateTime.Now),
+                        TimeOperation = DateTimeOffset.Now,
+                        Sum = -(int)price,
+                        IdWallet = Idwallet
+                    };
+                    db.HistoryWallets.Add(wallet1);
+                    db.SaveChanges();
 
                     Trip trip = new Trip
                     {
@@ -113,7 +147,7 @@ namespace carrr
                         EndDate = DateOnly.Parse(endDate.Text),
                         IdCar = carid,
                         IdClient = clientId,
-                        StatusTrip=true
+                        StatusTrip = true
                     };
                     db.Trips.Add(trip);
                     db.SaveChanges();
@@ -148,16 +182,16 @@ namespace carrr
                     label6.Visible = true;
                     var countMonth = (endDate.Value.Month - startDate.Value.Month) * 30;
                     var countDay = endDate.Value.Day - startDate.Value.Day;
-                    double x = 0;
+
                     if (countMonth == 0 && countDay == 1)
                     {
-                        x = ((countDay + countMonth) * oneDayPriceCar);
+                        price = ((countDay + countMonth) * oneDayPriceCar);
                     }
                     else
                     {
-                        x = ((countDay + countMonth) * oneDayPriceCar) * 0.8;
+                        price = ((countDay + countMonth) * oneDayPriceCar) * 0.8;
                     }
-                    priceTrip.Text = x.ToString() + " ₽";
+                    priceTrip.Text = price.ToString() + " ₽";
                     PriceCount.Visible = false;
                 }
                 catch (Exception ex)

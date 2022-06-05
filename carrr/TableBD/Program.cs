@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace carrr.TableBd
 {
-    internal static class Program
+    internal class Program
     {
         static void Main()
         {

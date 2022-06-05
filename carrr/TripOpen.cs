@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using carrr.TableBd;
+using System.Data;
 
 namespace carrr
 {
@@ -12,7 +13,7 @@ namespace carrr
         }
 
 
-        private async void TripOpen_Load(object sender, EventArgs e)
+        private void TripOpen_Load(object sender, EventArgs e)
         {
 
 
@@ -24,10 +25,10 @@ namespace carrr
             {
                 try
                 {
-                    var trips =  from Trip in db.Trips
+                    var trips = from Trip in db.Trips
                                 join Client in db.Clients on Trip.IdClient equals Client.IdClient
-                                       join Car in db.Cars on Trip.IdCar equals Car.IdCar
-                                where Trip.StatusTrip==true
+                                join Car in db.Cars on Trip.IdCar equals Car.IdCar
+                                where Trip.StatusTrip == true
                                 select new
                                 {
                                     idTrip = Trip.IdTrip,
@@ -43,11 +44,11 @@ namespace carrr
 
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-               
+
 
             }
         }

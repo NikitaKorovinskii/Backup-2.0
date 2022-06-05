@@ -71,7 +71,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(104, 120);
+            this.label2.Location = new System.Drawing.Point(66, 120);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 34);
@@ -83,7 +83,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(104, 172);
+            this.label3.Location = new System.Drawing.Point(66, 171);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 34);
@@ -177,7 +177,7 @@
             this.startDate.AutoSize = true;
             this.startDate.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.startDate.ForeColor = System.Drawing.Color.White;
-            this.startDate.Location = new System.Drawing.Point(224, 120);
+            this.startDate.Location = new System.Drawing.Point(178, 118);
             this.startDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.startDate.Name = "startDate";
             this.startDate.Size = new System.Drawing.Size(184, 34);
@@ -189,7 +189,7 @@
             this.endDate.AutoSize = true;
             this.endDate.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.endDate.ForeColor = System.Drawing.Color.White;
-            this.endDate.Location = new System.Drawing.Point(224, 172);
+            this.endDate.Location = new System.Drawing.Point(178, 171);
             this.endDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.endDate.Name = "endDate";
             this.endDate.Size = new System.Drawing.Size(184, 34);
@@ -250,7 +250,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(104, 227);
+            this.label8.Location = new System.Drawing.Point(66, 227);
             this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(131, 34);
@@ -262,7 +262,7 @@
             this.carName.AutoSize = true;
             this.carName.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.carName.ForeColor = System.Drawing.Color.White;
-            this.carName.Location = new System.Drawing.Point(224, 227);
+            this.carName.Location = new System.Drawing.Point(198, 227);
             this.carName.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.carName.Name = "carName";
             this.carName.Size = new System.Drawing.Size(184, 34);

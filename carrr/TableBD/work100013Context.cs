@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using carrr.TableBd;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace carrr
+namespace carrr.TableBd
 {
     public partial class work100013Context : DbContext
     {
@@ -73,6 +72,8 @@ namespace carrr
                     .HasColumnName("body_type");
 
                 entity.Property(e => e.CountSeats).HasColumnName("count_seats");
+
+                entity.Property(e => e.ImgCar).HasColumnName("img_car");
 
                 entity.Property(e => e.NameCar)
                     .HasMaxLength(40)
@@ -148,9 +149,9 @@ namespace carrr
 
             modelBuilder.Entity<HistoryWallet>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("history_wallet");
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DateOperation).HasColumnName("date_operation");
 
