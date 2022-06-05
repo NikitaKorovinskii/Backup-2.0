@@ -145,6 +145,7 @@ namespace Server
             });
             Post("/addWallet", (x) => //добавить отпрвку чека
             {
+                Response response = new();
                 x = this.Bind<AddSumWallet>();
                 using (work100013Context db = new())
                 {
@@ -163,12 +164,12 @@ namespace Server
                     };
                     db.HistoryWallets.Add(historyWallet);
                     db.SaveChanges();
-                }
-
-                Response response = new();
-
-             
-
+                    var list1 = from Wallet in db.Wallets
+                                where Wallet.IdClient == 34
+                                select new
+                                {
+                                    Sum = Wallet.Sum,
+                                };
                     response.StatusCode = HttpStatusCode.OK;
                     response.Headers["Access-Control-Allow-Origin"] = "*";
                     response.Headers["Access-Control-Allow-Method"] = "POST";
@@ -177,9 +178,11 @@ namespace Server
                     response.Headers["Token"] = myToken;
                     response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
                     response.Headers["Content-Type"] = "application/json";
+                    response.Headers["Account"] = System.Text.Json.JsonSerializer.Serialize(list1);
+                    response.Headers["Access-Control-Expose-Headers"] = "Account";
                     return response;
-                
-       
+                }
+
             });
             Get("/client", (x21) =>
                 {
@@ -351,6 +354,49 @@ namespace Server
 
                 }
 
+
+            });
+
+
+
+            Post("/Trip", (x) => //добавить отпрвку чека
+            {
+                Response response = new();
+                x = this.Bind<IdTrip>();
+                using (work100013Context db = new())
+                {
+                    try
+                    {
+                        int idCar = x.IdCar;
+                        var list = from Trip in db.Trips
+                                   where Trip.IdCar == idCar
+                                   select new
+                                   {
+                                       StartDate = Convert.ToString(Trip.StartDate),
+                                       EndDate = Convert.ToString(Trip.EndDate),
+
+                                   };
+
+
+                        response.StatusCode = HttpStatusCode.OK;
+                        response.Headers["Access-Control-Allow-Origin"] = "*";
+                        response.Headers["Access-Control-Allow-Method"] = "POST";
+
+                        string myToken = "lalala.somestring.secretword";
+                        response.Headers["Token"] = myToken;
+                        response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
+                        response.Headers["Content-Type"] = "application/json";
+                        response.Headers["Trip"] = System.Text.Json.JsonSerializer.Serialize(list);
+                        response.Headers["Access-Control-Expose-Headers"] = "Trip";
+                       
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    return response;
+
+                }
 
             });
         }
