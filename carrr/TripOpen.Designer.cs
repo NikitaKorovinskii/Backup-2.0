@@ -44,6 +44,7 @@
             this.table.AllowUserToAddRows = false;
             this.table.AllowUserToDeleteRows = false;
             this.table.AllowUserToOrderColumns = true;
+            this.table.BackgroundColor = System.Drawing.Color.Silver;
             this.table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -59,7 +60,6 @@
             this.table.RowHeadersWidth = 51;
             this.table.Size = new System.Drawing.Size(677, 413);
             this.table.TabIndex = 0;
-            this.table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_CellContentClick);
             this.table.DoubleClick += new System.EventHandler(this.table_DoubleClick);
             // 
             // Column1

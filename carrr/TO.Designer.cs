@@ -42,10 +42,10 @@
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(48, 35);
-            this.button2.Margin = new System.Windows.Forms.Padding(5);
+            this.button2.Location = new System.Drawing.Point(42, 26);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(56, 35);
+            this.button2.Size = new System.Drawing.Size(49, 26);
             this.button2.TabIndex = 5;
             this.button2.Text = "<--";
             this.button2.UseVisualStyleBackColor = false;
@@ -62,14 +62,13 @@
             this.Column2,
             this.Column3,
             this.Column5});
-            this.table.Location = new System.Drawing.Point(231, 35);
-            this.table.Margin = new System.Windows.Forms.Padding(5);
+            this.table.Location = new System.Drawing.Point(202, 26);
+            this.table.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.table.Name = "table";
             this.table.ReadOnly = true;
             this.table.RowHeadersWidth = 51;
-            this.table.Size = new System.Drawing.Size(555, 493);
+            this.table.Size = new System.Drawing.Size(486, 370);
             this.table.TabIndex = 4;
-            this.table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_CellContentClick);
             this.table.DoubleClick += new System.EventHandler(this.table_DoubleClick);
             // 
             // Column1
@@ -106,14 +105,13 @@
             // 
             // TO
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(914, 600);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.table);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Технический осмотр";

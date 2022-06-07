@@ -38,7 +38,7 @@ namespace carrr
 
         private void Add_Click(object sender, EventArgs e)
         {
-            if (DateTo.Text!=""&& Price.Text!=""&& Description.Text!="")
+            if (DateTo.Text != "" && Price.Text != "" && Description.Text != "")
             {
                 using (work100013Context db = new work100013Context())
                 {
@@ -69,7 +69,7 @@ namespace carrr
             {
                 MessageBox.Show("Заполните все поля");
             }
-            
+
         }
     }
 }

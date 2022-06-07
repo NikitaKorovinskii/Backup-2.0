@@ -11,16 +11,10 @@ namespace carrr
 
 
         }
-
-
         private void TripOpen_Load(object sender, EventArgs e)
         {
+            table.AllowUserToAddRows = false;
 
-
-
-
-            table.AllowUserToAddRows = false; //запрешаем пользователю самому добавлять строки
-                                              //Добавляем строку, указывая значения колонок поочереди слева направо
             using (work100013Context db = new())
             {
                 try
@@ -48,27 +42,14 @@ namespace carrr
                 {
                     MessageBox.Show(ex.Message);
                 }
-
-
             }
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
             Hide();
             MainForm mainForm = new MainForm();
             mainForm.Show();
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -96,16 +77,6 @@ namespace carrr
 
                 }
             }
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void table_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
     }

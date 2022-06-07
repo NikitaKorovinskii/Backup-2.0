@@ -49,14 +49,13 @@
             this.Column2,
             this.Column3,
             this.Column5});
-            this.table.Location = new System.Drawing.Point(74, 59);
-            this.table.Margin = new System.Windows.Forms.Padding(5);
+            this.table.Location = new System.Drawing.Point(65, 44);
+            this.table.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.table.Name = "table";
             this.table.ReadOnly = true;
             this.table.RowHeadersWidth = 51;
-            this.table.Size = new System.Drawing.Size(729, 537);
+            this.table.Size = new System.Drawing.Size(638, 403);
             this.table.TabIndex = 1;
-            this.table.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_CellContentClick);
             this.table.DoubleClick += new System.EventHandler(this.table_DoubleClick);
             // 
             // Column1
@@ -95,10 +94,10 @@
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(15, 17);
-            this.button2.Margin = new System.Windows.Forms.Padding(5);
+            this.button2.Location = new System.Drawing.Point(13, 13);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(56, 35);
+            this.button2.Size = new System.Drawing.Size(49, 26);
             this.button2.TabIndex = 4;
             this.button2.Text = "<--";
             this.button2.UseVisualStyleBackColor = false;
@@ -106,14 +105,14 @@
             // 
             // EventCont
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(902, 656);
+            this.ClientSize = new System.Drawing.Size(789, 492);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.table);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "EventCont";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Событие";
