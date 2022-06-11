@@ -22,7 +22,7 @@ namespace carrr
                     var trips = from Trip in db.Trips
                                 join Client in db.Clients on Trip.IdClient equals Client.IdClient
                                 join Car in db.Cars on Trip.IdCar equals Car.IdCar
-                                where Trip.StatusTrip == true
+                                where Trip.StatusTrip == true && Trip.StatusCar == false
                                 select new
                                 {
                                     idTrip = Trip.IdTrip,

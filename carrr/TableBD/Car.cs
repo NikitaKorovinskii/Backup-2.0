@@ -19,8 +19,6 @@ namespace carrr.TableBd
         public int PriceCar { get; set; }
         public string BodyType { get; set; } = null!;
         public int CountSeats { get; set; }
-        public bool StatusBooking { get; set; }
-        public bool StatusIssuance { get; set; }
         public string? ImgCar { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }

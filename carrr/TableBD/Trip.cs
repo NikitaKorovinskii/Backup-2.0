@@ -16,6 +16,7 @@ namespace carrr.TableBd
         public int? IdCar { get; set; }
         public int? IdClient { get; set; }
         public bool? StatusTrip { get; set; }
+        public bool? StatusCar { get; set; }
 
         public virtual Car? IdCarNavigation { get; set; }
         public virtual Client? IdClientNavigation { get; set; }

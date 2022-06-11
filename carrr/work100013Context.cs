@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using carrr.TableBd;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace carrr.TableBd
+namespace carrr
 {
     public partial class work100013Context : DbContext
     {
@@ -84,10 +85,6 @@ namespace carrr.TableBd
                     .HasColumnName("number_car");
 
                 entity.Property(e => e.PriceCar).HasColumnName("price_car");
-
-                entity.Property(e => e.StatusBooking).HasColumnName("status_booking");
-
-                entity.Property(e => e.StatusIssuance).HasColumnName("status_issuance");
             });
 
             modelBuilder.Entity<Client>(entity =>
@@ -233,6 +230,8 @@ namespace carrr.TableBd
                 entity.Property(e => e.IdClient).HasColumnName("id_client");
 
                 entity.Property(e => e.StartDate).HasColumnName("start_date");
+
+                entity.Property(e => e.StatusCar).HasColumnName("status_car");
 
                 entity.Property(e => e.StatusTrip).HasColumnName("status_trip");
 

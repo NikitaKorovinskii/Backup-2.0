@@ -111,8 +111,7 @@ namespace carrr
                     {
                         carid = u.IdCar;
                         oneDayPriceCar = u.PriceCar;
-                        u.StatusBooking = true;
-                        u.StatusIssuance = true;
+                      
 
                     }
                     int Idwallet = 0;
@@ -147,7 +146,8 @@ namespace carrr
                         EndDate = DateOnly.Parse(endDate.Text),
                         IdCar = carid,
                         IdClient = clientId,
-                        StatusTrip = true
+                        StatusTrip = true,
+                        StatusCar= false
                     };
                     db.Trips.Add(trip);
                     db.SaveChanges();

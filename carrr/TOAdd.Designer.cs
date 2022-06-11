@@ -105,7 +105,7 @@
             this.DateTo.Location = new System.Drawing.Point(575, 85);
             this.DateTo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DateTo.Name = "DateTo";
-            this.DateTo.Size = new System.Drawing.Size(135, 42);
+            this.DateTo.Size = new System.Drawing.Size(165, 42);
             this.DateTo.TabIndex = 5;
             // 
             // Price
@@ -114,7 +114,7 @@
             this.Price.Location = new System.Drawing.Point(436, 156);
             this.Price.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Price.Name = "Price";
-            this.Price.Size = new System.Drawing.Size(114, 42);
+            this.Price.Size = new System.Drawing.Size(143, 42);
             this.Price.TabIndex = 7;
             // 
             // label4

@@ -319,11 +319,12 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Century", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(121, 351);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 76);
             this.button1.TabIndex = 22;
-            this.button1.Text = "Создать отчёт";
+            this.button1.Text = "Договор";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 

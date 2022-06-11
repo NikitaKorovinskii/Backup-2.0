@@ -38,7 +38,7 @@ namespace carrr
                         startDate.Text = u.startDate.ToString();
                         endDate.Text = u.endDate.ToString();
                         name.Text = u.name.ToString();
-                        carName.Text = u.carName.ToString() + " " + u.numberCar;
+                        carName.Text = u.carName.ToString() + "(" + u.numberCar+")" ;
                         lastName.Text = u.lastName.ToString();
                         middleName.Text = u.middleName.ToString();
                         number.Text = "8" + u.number.ToString();
@@ -68,10 +68,11 @@ namespace carrr
                 {
                     try
                     {
-                        var list = db.Trips.Where(p => p.StatusTrip == true);
+                        var list = db.Trips.Where(p=> p.IdTrip == idTrip1);
                         foreach (var u in list)
                         {
-                            u.StatusTrip = false;
+                            u.StatusTrip = true;
+                            u.StatusCar = true;
                         }
                         db.SaveChanges();
 
@@ -105,23 +106,7 @@ namespace carrr
 
 
                 }
-                using (work100013Context db = new())
-                {
-                    try
-                    {
-                        var carsAll = db.Cars.Where(p => p.IdCar == cars);
-                        foreach (var carid in carsAll)
-                        {
-                            carid.StatusIssuance = false;
-
-                        }
-                        db.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
+               
 
 
                 Hide();
@@ -154,10 +139,6 @@ namespace carrr
 
             using (work100013Context db = new work100013Context())
             {
-
-
-
-
 
                 var trips = from Trip in db.Trips
                             join Client in db.Clients on Trip.IdClient equals Client.IdClient
@@ -204,7 +185,7 @@ namespace carrr
                     worksheet.Cells[2, 1].Value = "Мы:";
                     worksheet.Cells[3, 1].Value = "ООО " + "CoinCar" + ", по адресу ул. Карла Маркса, 63, Киров, Россия, именуемый в дальнейшем Арендодатель";
                     worksheet.Cells[4, 1].Value = "И";
-                    worksheet.Cells[5, 1].Value = u.lastName + " " + u.name + " " + u.middleName + $" Пасспорт: {u.passport} именуемый в дальнейшем Арендатор";
+                    worksheet.Cells[5, 1].Value = u.lastName + " " + u.name + " " + u.middleName + $" Паспорт: {u.passport} именуемый в дальнейшем Арендатор";
                     worksheet.Cells[6, 1].Value = "заключили настоящий договор о нижеследующем: ";
                     worksheet.Cells[7, 1].Value = "Предмет ";
                     worksheet.Cells[8, 1].Value = "1.    Арендодатель предоставляет Арендатору автомобиль: ";
@@ -221,7 +202,7 @@ namespace carrr
                     worksheet.Cells[19, 1].Value = "3.1.         Ответственность за состояние транспортного средства в нерабочее время переходит на Арендодателя. В случае наступления вышеперечисленных фактов, Арендодатель возмещает понесенный ущерб за свой счет, а также возмещает ущерб в пользу Арендатора.";
                     worksheet.Cells[20, 1].Value = "3.2.         Арендатор обязан после истечения срока настоящего соглашения возвратить транспортное средство в технически исправном состоянии, в котором оно находилось при приеме-передаче автомобиля.";
                     worksheet.Cells[21, 1].Value = "Форс-мажорные ситуации:";
-                    worksheet.Cells[22, 1].Value = "4.    Контрагенты освобождаются от ответственности по настоящему \n соглашению в случае возникновения ситуаций, происходящих вследствие непреодолимой силы. К таким ситуациям могут относиться обстоятельства, которые одна из сторон не может самостоятельно контролировать, например: неисполнение обязательств по настоящему договору одной из сторон.";
+                    worksheet.Cells[22, 1].Value = "4.    Контрагенты освобождаются от ответственности по настоящему  соглашению в случае возникновения ситуаций, происходящих вследствие непреодолимой силы. К таким ситуациям могут относиться обстоятельства, которые одна из сторон не может самостоятельно контролировать, например: неисполнение обязательств по настоящему договору одной из сторон.";
                     worksheet.Cells[23, 1].Value = "4.1.         При возникновении таких ситуаций одна из сторон обязуется уведомить другую в письменной форме в срок: 5 (Пять) дней после выявления такого факта.";
                     worksheet.Cells[24, 1].Value = "4.2.         Если обязательства по настоящему соглашению не могут быть исполнены из-за факторов, которые не зависят от воли сторон, Арендатор обязуется выплатить арендную плату за эксплуатацию автомобиля в том объеме, который он должен за момент использования транспортного средства. ";
                     worksheet.Cells[25, 1].Value = "Дополнительные условия: ";
