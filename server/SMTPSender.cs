@@ -21,7 +21,7 @@ namespace Server
             // отправитель - устанавливаем адрес и отображаемое в письме имя
             from = new MailAddress("nikita19999lol@gmail.com", "Привет");
             // кому отправляем
-           to = new MailAddress("nikita19999lol@gmail.com");
+            to = new MailAddress("nikita19999lol@gmail.com");
             // создаем объект сообщения
             message = new MailMessage(from, to);
             // тема письма
@@ -35,15 +35,47 @@ namespace Server
             // логин и пароль
             smtp.Credentials = new NetworkCredential("nikita19999lol@gmail.com", "dqzqrtrwkjxqxvzp");
             smtp.EnableSsl = true;
-            Console.Read();
         }
 
-        public void SendUsual()
+        public void SendUsual( int x)
         {
-            message.Subject = "Hello Danilka!";
-            message.Body = "Zdraste from server's Nikitka!";
-            Console.WriteLine("lllll");
-            smtp.Send(message);
+            if (x > 0)
+            {
+                message.Subject = "Чек от CoinCar";
+                var mesText = new StringBuilder("Чек о об операции на CoinCar" + Environment.NewLine);
+                mesText.Append("<p>***********************</p>" + Environment.NewLine +
+                    "<p><strong>  CoinCar </strong></p><p> Добро пожаловать </p>" + Environment.NewLine +
+                    "<p> ККМ 00075411 &nbsp; &nbsp; &nbsp; &nbsp; #3969</p>" + Environment.NewLine +
+                    "<p> ИНН 1087746942040 </p><p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ЭКЛЗ 3851495566 </p>" + Environment.NewLine +
+                    $"<p> {DateOnly.FromDateTime(DateTime.Now)} {TimeOnly.FromDateTime(DateTime.Now)} СИС.</p><p> &nbsp; АДМИ </p>" + Environment.NewLine +
+                    "<p> Пополнение баланса </p>" + Environment.NewLine +
+                    $"<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = {x} ₽ </p>" + Environment.NewLine +
+                    $"<p> &nbsp;<strong> ИТОГ = {x} ₽</strong></p><p> ***********************</p>" + Environment.NewLine +
+                    "<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p> " + Environment.NewLine);
+                message.Body = mesText.ToString();
+                message.IsBodyHtml = true;
+
+                smtp.Send(message);
+            }
+            else
+            {
+                message.Subject = "Чек от CoinCar";
+                var mesText = new StringBuilder("Чек о об операции на CoinCar" + Environment.NewLine);
+                mesText.Append("<p>***********************</p>" + Environment.NewLine +
+                    "<p><strong>  CoinCar </strong></p><p> Добро пожаловать </p>" + Environment.NewLine +
+                    "<p> ККМ 00075411 &nbsp; &nbsp; &nbsp; &nbsp; #3969</p>" + Environment.NewLine +
+                    "<p> ИНН 1087746942040 </p><p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ЭКЛЗ 3851495566 </p>" + Environment.NewLine +
+                    $"<p> {DateOnly.FromDateTime(DateTime.Now)} {TimeOnly.FromDateTime(DateTime.Now)} СИС.</p><p> &nbsp; АДМИ </p>" + Environment.NewLine +
+                    "<p> Списание </p>" + Environment.NewLine +
+                    $"<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = {x} ₽ </p>" + Environment.NewLine +
+                    $"<p> &nbsp;<strong> ИТОГ = {x} ₽</strong></p><p> ***********************</p>" + Environment.NewLine +
+                    "<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p> " + Environment.NewLine);
+                message.Body = mesText.ToString();
+                message.IsBodyHtml = true;
+
+                smtp.Send(message);
+            }
+            
         }
 
         public void SendPDF()

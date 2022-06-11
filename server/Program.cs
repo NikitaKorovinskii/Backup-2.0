@@ -2,8 +2,6 @@
 using Nancy.Hosting.Self;
 using Nancy.ModelBinding;
 using NancyNew;
-using Newtonsoft.Json;
-using server;
 using server.BdTable;
 
 namespace Server
@@ -24,10 +22,7 @@ namespace Server
 
                 Console.WriteLine("Your application is running on " + uri);
                 Console.WriteLine("Press any [Enter] to close the host.");
-               /* SMTPSender n = new SMTPSender();//не забыть
-                n.SendUsual();*/
                 Console.ReadLine();
-                
 
             }
         }
@@ -103,7 +98,7 @@ namespace Server
             Post("/exect", (x) =>
             {
                 x = this.Bind<Auth>();
-            //TODO: Add JWT
+                //TODO: Add JWT
                 string login = x.Login;
                 string password = x.Password;
                 int x1 = 0;
@@ -147,25 +142,28 @@ namespace Server
             {
                 Response response = new();
                 x = this.Bind<AddSumWallet>();
+                int sum = (int)x.Sum;
+                SMTPSender n = new SMTPSender();//не забыть
+                n.SendUsual(sum);
                 using (work100013Context db = new())
                 {
-                    int IdWallet=0;
-                    var list = db.Wallets.Where(p => p.IdClient == 34);
-                        foreach (var wallet in list)
+                    int IdWallet = 0;
+                    var list = db.Wallets.Where(p => p.IdClient == 43);
+                    foreach (var wallet in list)
                     {
                         IdWallet = wallet.IdWallet;
                     }
                     HistoryWallet historyWallet = new HistoryWallet
                     {
-                       DateOperation = DateOnly.FromDateTime(DateTime.Now),
-                       TimeOperation = DateTimeOffset.Now,
-                       Sum = x.Sum,
-                       IdWallet = IdWallet
+                        DateOperation = DateOnly.FromDateTime(DateTime.Now),
+                        TimeOperation = DateTimeOffset.Now,
+                        Sum = x.Sum,
+                        IdWallet = IdWallet
                     };
                     db.HistoryWallets.Add(historyWallet);
                     db.SaveChanges();
                     var list1 = from Wallet in db.Wallets
-                                where Wallet.IdClient == 34
+                                where Wallet.IdClient == 43
                                 select new
                                 {
                                     Sum = Wallet.Sum,
@@ -192,14 +190,14 @@ namespace Server
 
                         var list = from Client in db.Clients
                                    join Auth in db.Auths on Client.IdClient equals Auth.IdClient
-                                   where Client.IdClient == 34
+                                   where Client.IdClient == 43
                                    select new
                                    {
-                                        LastName = Client.LastName,
-                                        Name = Client.Name,
-                                        MiddleName = Client.MiddleName,
-                                        DriverNum = Client.NumberDriver,
-                                        Email = Auth.Email,
+                                       LastName = Client.LastName,
+                                       Name = Client.Name,
+                                       MiddleName = Client.MiddleName,
+                                       DriverNum = Client.NumberDriver,
+                                       Email = Auth.Email,
                                    };
 
                         response.StatusCode = HttpStatusCode.OK;
@@ -286,7 +284,7 @@ namespace Server
 
 
             });
-            Get("/TripInfoClient", (ew) => 
+            Get("/TripInfoClient", (ew) =>
             {
                 Response response = new();
                 using (work100013Context db = new())
@@ -296,7 +294,7 @@ namespace Server
                         var to = from Trip in db.Trips
                                  join Car in db.Cars on Trip.IdCar equals Car.IdCar
                                  join Client in db.Clients on Trip.IdClient equals Client.IdClient
-                                 where Client.IdClient == 34
+                                 where Client.IdClient == 43 orderby Trip.IdTrip descending
                                  select new
                                  {
                                      IdTrip = Trip.IdTrip,
@@ -332,11 +330,11 @@ namespace Server
                     try
                     {
                         var balance = from Wallet in db.Wallets
-                                 where Wallet.IdClient == 34
-                                 select new
-                                 {
-                                     Sum = Wallet.Sum
-                                 };
+                                      where Wallet.IdClient == 43
+                                      select new
+                                      {
+                                          Sum = Wallet.Sum
+                                      };
 
                         response.StatusCode = HttpStatusCode.OK;
                         response.Headers["Access-Control-Allow-Origin"] = "*";
@@ -356,9 +354,6 @@ namespace Server
 
 
             });
-
-
-
             Post("/Trip", (x) => //добавить отпрвку чека
             {
                 Response response = new();
@@ -388,12 +383,47 @@ namespace Server
                         response.Headers["Content-Type"] = "application/json";
                         response.Headers["Trip"] = System.Text.Json.JsonSerializer.Serialize(list);
                         response.Headers["Access-Control-Expose-Headers"] = "Trip";
-                       
+
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
+                    return response;
+
+                }
+
+            });
+            Post("/addTrip", (x) =>
+            {
+                Response response = new();
+                x = this.Bind<NewTrip>();
+                using (work100013Context db = new())
+                {
+                    
+                        Trip trip = new Trip
+                        {
+                            StartDate = DateOnly.Parse(x.StartDate), 
+                            EndDate = DateOnly.Parse(x.EndDate),
+                            IdCar = x.IdCar,
+                            IdClient = 43,
+                            StatusTrip = true,
+                            StatusCar = false
+                        };
+                        db.Trips.Add(trip);
+                        db.SaveChanges();
+
+
+                        response.StatusCode = HttpStatusCode.OK;
+                        response.Headers["Access-Control-Allow-Origin"] = "*";
+                        response.Headers["Access-Control-Allow-Method"] = "POST";
+
+                        string myToken = "lalala.somestring.secretword";
+                        response.Headers["Token"] = myToken;
+                        response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
+                        response.Headers["Content-Type"] = "application/json";
+
+                    
                     return response;
 
                 }

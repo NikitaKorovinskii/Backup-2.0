@@ -15,10 +15,10 @@ namespace server.BdTable
         public string NumberDriver { get; set; } = null!;
         public string Passport { get; set; } = null!;
         public string Number { get; set; } = null!;
-        public string DataOfBith { get; set; }
+        public string? DataOfBith { get; set; }
 
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
 
     }
 }
