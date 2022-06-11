@@ -85,7 +85,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="368.0" layoutY="30.0" text="Заявка 1" textFill="WHITE">
+      <Label layoutX="368.0" layoutY="30.0" text="Заявка" textFill="WHITE">
          <font>
             <Font name="Century" size="22.0" />
          </font>
@@ -95,5 +95,6 @@
             <Font name="Century" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="dasda" layoutX="61.0" layoutY="31.0" onAction="#back" mnemonicParsing="false" text="&lt;--" />
    </children>
 </AnchorPane>

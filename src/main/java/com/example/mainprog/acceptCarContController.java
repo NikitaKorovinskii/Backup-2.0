@@ -42,9 +42,8 @@ public class acceptCarContController {
                         "VALUES ( '" + title + "', (select id_Car from trip where trip.id_Trip='" + ids + "'))";
                 int in = DB.Insert(req);
             }
-            req = "update car set status_issuance = false,status_Booking = false" +
-                    " where id_car=(select trip.id_Car from trip\n" +
-                    "            where trip.id_Trip='" + ids + "')";
+            req = "update trip set status_Car = false,status_trip = false\n" +
+                    "                     where id_Trip='"+ids+"'";
             int re = DB.Update(req);
             req = "delete from tripTimeClient\n" +
                     "where id_Trip='" + ids + "'";
@@ -127,5 +126,20 @@ public class acceptCarContController {
             e.printStackTrace();
         }
 
+    }
+
+    public void back(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

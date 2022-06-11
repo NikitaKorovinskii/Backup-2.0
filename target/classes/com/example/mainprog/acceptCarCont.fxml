@@ -82,5 +82,10 @@
             <Font name="Century" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="dsadsa" layoutX="46.0" layoutY="30.0" mnemonicParsing="false" onAction="#back" text="&lt;--">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

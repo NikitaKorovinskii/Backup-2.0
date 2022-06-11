@@ -106,7 +106,7 @@ public class requestController {
             req = "select trip.id_Trip, start_Date,end_Date,Car.name_Car,number_Car, tripTimeClient.time  from trip\n" +
                     "                    join car on Car.id_Car=trip.id_Car\n" +
                     "                    join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
-                    "where status_Booking=true and status_Issuance=false and start_Date= '"+x+"'order by trip.id_Trip";
+                    "where status_Car = true and status_trip = true order by trip.id_Trip";
             ResultSet rs = DB.Select(req);
             while (rs.next()){
                 tripList.add(new trip (rs.getInt("id_Trip"),

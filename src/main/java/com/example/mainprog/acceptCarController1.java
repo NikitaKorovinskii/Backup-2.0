@@ -119,7 +119,7 @@ public class acceptCarController1 {
             req = "select trip.id_Trip,time, start_Date,end_Date,Car.name_Car,number_Car from trip\n" +
                     "                                      join car on Car.id_Car=trip.id_Car\n" +
                     "                                       join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
-                    "                    where status_Booking=true and status_Issuance=true order by trip.id_Trip";
+                    "               where status_trip=false    order by trip.id_Trip";
             ResultSet rs = DB.Select(req);
             while (rs.next()) {
                 tripList.add(new trip(
@@ -139,8 +139,7 @@ public class acceptCarController1 {
             try {
                 req = "select Car.name_Car  from trip " +
                         "join car on Car.id_Car=trip.id_Car\n" +
-                        "                                       join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
-                        "                    where status_Booking=true and status_Issuance=true";
+                        "                                       join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip";
                 ResultSet rsz = DB.Select(req);
                 while (rsz.next()) {
                     nameCar.setText(rsz.getString("name_Car"));
@@ -164,7 +163,7 @@ public class acceptCarController1 {
                     req = "select trip.id_Trip,time, start_Date,end_Date,Car.name_Car,number_Car from trip\n" +
                             "                                      join car on Car.id_Car=trip.id_Car\n" +
                             "                                       join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
-                            "                    where status_Booking=true and status_Issuance=true order by trip.id_Trip";
+                            "                    order by trip.id_Trip";
                     ResultSet rs = DB.Select(req);
                     while (rs.next()) {
                         tripList.add(new trip(
@@ -190,7 +189,7 @@ public class acceptCarController1 {
                     req = "select trip.id_Trip,time, start_Date,end_Date,Car.name_Car,number_Car from trip\n" +
                             "                                      join car on Car.id_Car=trip.id_Car\n" +
                             "                                       join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
-                            "                    where status_Booking=true and status_Issuance=true and name_Car='" + numNameCar.getValue() + "'";
+                            "                     and name_Car='" + numNameCar.getValue() + "'";
                     ResultSet rs = DB.Select(req);
                     while (rs.next()) {
                         tripList.add(new trip(
@@ -219,7 +218,7 @@ public class acceptCarController1 {
                 req = "select trip.id_Trip,time, start_Date,end_Date,Car.name_Car,number_Car from trip\n" +
                         "                                      join car on Car.id_Car=trip.id_Car\n" +
                         "                                       join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
-                        "                    where status_Booking=true and status_Issuance=true and number_car='"+number+"' order by trip.id_Trip";
+                        "                    where  number_car='"+number+"' order by trip.id_Trip";
                 ResultSet rs = DB.Select(req);
                 while (rs.next()) {
                     tripList.add(new trip(
@@ -245,7 +244,7 @@ public class acceptCarController1 {
                 req = "select trip.id_Trip,time, start_Date,end_Date,Car.name_Car,number_Car from trip\n" +
                         "                                      join car on Car.id_Car=trip.id_Car\n" +
                         "                                       join tripTimeClient on trip.id_Trip = tripTimeClient.id_trip\n" +
-                        "                    where status_Booking=true and status_Issuance=true and name_Car='" + numNameCar.getValue() + "'and number_car='"+number+"'";
+                        "                    where  name_Car='" + numNameCar.getValue() + "'and number_car='"+number+"'";
                 ResultSet rs = DB.Select(req);
                 while (rs.next()) {
                     tripList.add(new trip(

@@ -7,21 +7,17 @@ public class car {
     public int priceCar;
     public String bodyType;
     public int countSeats;
-    public boolean statusBooking;
-    public boolean statusIssuance;
     public int horsePower;
 
 
-    public car(int id, String nameCar, String numCar, int priceCar, String bodyType, int countSeats, boolean statusBooking,
-               boolean statusIssuance, int horsePower) {
+    public car(int id, String nameCar, String numCar, int priceCar, String bodyType, int countSeats,  int horsePower) {
         this.id = id;
         this.nameCar = nameCar;
         this.numCar=numCar;
         this.priceCar = priceCar;
         this.bodyType = bodyType;
         this.countSeats = countSeats;
-        this.statusBooking= statusBooking;
-        this.statusIssuance=statusIssuance;
+
         this.horsePower=horsePower;
     }
 
@@ -78,21 +74,7 @@ public class car {
         return countSeats;
     }
 
-    public void setStatusBooking(boolean statusBooking) {
-        this.statusBooking = statusBooking;
-    }
 
-    public boolean getStatusBooking() {
-        return statusBooking;
-    }
-
-    public void setStatusIssuance(boolean statusIssuance) {
-        this.statusIssuance = statusIssuance;
-    }
-
-    public boolean getStatusIssuance() {
-        return statusIssuance;
-    }
     public void setHorsePower(int horsePower) {
         this.horsePower = horsePower;
     }

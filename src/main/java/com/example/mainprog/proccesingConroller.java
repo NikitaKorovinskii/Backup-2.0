@@ -37,8 +37,7 @@ public class proccesingConroller {
         String req;
 
         try {
-            req = "update car set status_issuance = true where id_car=(select trip.id_Car from trip\n" +
-                    "                                                                       where trip.id_Trip='"+ids+"')";
+            req = "update trip set status_Car = true, status_trip = false where trip.id_Trip='"+ids+"'";
             int re = DB.Update(req);
             System.out.println(re);
         } catch (SQLException e) {
@@ -101,5 +100,19 @@ public class proccesingConroller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public void back(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenu.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
