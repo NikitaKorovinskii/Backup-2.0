@@ -2,17 +2,18 @@
 using Nancy.Hosting.Self;
 using Nancy.ModelBinding;
 using NancyNew;
+using server;
 using server.BdTable;
 
 namespace Server
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var uri = new Uri("http://localhost:1234");
 
-            HostConfiguration hostConfiguration = new HostConfiguration();
+            HostConfiguration hostConfiguration = new ();
             hostConfiguration.UrlReservations.CreateAutomatically = true;
 
 
@@ -46,7 +47,7 @@ namespace Server
                 {
                     string pasID = x.Passport;
                     int idClient = 0;
-                    Client client = new Client
+                    Client client = new()
                     {
                         Name = x.Name,
                         LastName = x.LastName,
@@ -124,9 +125,9 @@ namespace Server
                     response.Headers["Access-Control-Allow-Origin"] = "*";
                     response.Headers["Access-Control-Allow-Method"] = "POST";
 
-                    string myToken = "lalala.somestring.secretword";
-                    response.Headers["Token"] = myToken;
-                    response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
+                    PersonaleToken.SetToken(idClient + "." + Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
+                    response.Headers["Token"] = PersonaleToken.GetToken();
+                    response.Headers["Access-Control-Expose-Headers"] = "Token";
                     response.Headers["Content-Type"] = "application/json";
 
                     response.Headers["Account"] = System.Text.Json.JsonSerializer.Serialize(x);
@@ -138,75 +139,96 @@ namespace Server
                     return response;
                 }
             });
-            Post("/addWallet", (x) => //добавить отпрвку чека
+            Post("/addWallet", (x) =>
             {
                 Response response = new();
-                x = this.Bind<AddSumWallet>();
-                int sum = (int)x.Sum;
-                SMTPSender n = new SMTPSender();//не забыть
-                n.SendUsual(sum);
-                using (work100013Context db = new())
+                string token_headers = Request.Headers["Token"].FirstOrDefault();
+                string idClient = Request.Headers["IdClient"].FirstOrDefault();
+                if (token_headers == PersonaleToken.GetToken().Split('.')[1])
                 {
-                    int IdWallet = 0;
-                    var list = db.Wallets.Where(p => p.IdClient == 43);
-                    foreach (var wallet in list)
+                    x = this.Bind<AddSumWallet>();
+                    int sum = (int)x.Sum;
+                    string email = "";
+                    using (work100013Context db = new())
                     {
-                        IdWallet = wallet.IdWallet;
+                        int IdWallet = 0;
+                        var client = from Auth in db.Auths
+                                     where Auth.IdClient == Int32.Parse(idClient)
+                                     select new
+                                     {
+                                         Email = Auth.Email
+                                     };
+                        foreach (var cl in client)
+                        {
+                            email = cl.Email.ToString();
+                        }
+                        SMTPSender s = new SMTPSender(email);
+                        s.SendUsual(sum);
+                        var list = db.Wallets.Where(p => p.IdClient == Int32.Parse(idClient));
+                        foreach (var wallet in list)
+                        {
+                            IdWallet = wallet.IdWallet;
+                        }
+                        HistoryWallet historyWallet = new HistoryWallet
+                        {
+                            DateOperation = DateOnly.FromDateTime(DateTime.Now),
+                            TimeOperation = DateTimeOffset.Now,
+                            Sum = x.Sum,
+                            IdWallet = IdWallet
+                        };
+                        db.HistoryWallets.Add(historyWallet);
+                        db.SaveChanges();
+                        var list1 = from Wallet in db.Wallets
+                                    where Wallet.IdClient == Int32.Parse(idClient)
+                                    select new
+                                    {
+                                        Sum = Wallet.Sum,
+                                    };
+                        response.StatusCode = HttpStatusCode.OK;
+                        response.Headers["Access-Control-Allow-Origin"] = "*";
+                        response.Headers["Access-Control-Allow-Method"] = "POST";
+                        response.Headers["Content-Type"] = "application/json";
+                        response.Headers["Account"] = System.Text.Json.JsonSerializer.Serialize(list1);
+                        response.Headers["Access-Control-Expose-Headers"] = "Account";
                     }
-                    HistoryWallet historyWallet = new HistoryWallet
-                    {
-                        DateOperation = DateOnly.FromDateTime(DateTime.Now),
-                        TimeOperation = DateTimeOffset.Now,
-                        Sum = x.Sum,
-                        IdWallet = IdWallet
-                    };
-                    db.HistoryWallets.Add(historyWallet);
-                    db.SaveChanges();
-                    var list1 = from Wallet in db.Wallets
-                                where Wallet.IdClient == 43
-                                select new
-                                {
-                                    Sum = Wallet.Sum,
-                                };
-                    response.StatusCode = HttpStatusCode.OK;
-                    response.Headers["Access-Control-Allow-Origin"] = "*";
-                    response.Headers["Access-Control-Allow-Method"] = "POST";
 
-                    string myToken = "lalala.somestring.secretword";
-                    response.Headers["Token"] = myToken;
-                    response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
-                    response.Headers["Content-Type"] = "application/json";
-                    response.Headers["Account"] = System.Text.Json.JsonSerializer.Serialize(list1);
-                    response.Headers["Access-Control-Expose-Headers"] = "Account";
-                    return response;
                 }
+                return response;
 
             });
             Get("/client", (x21) =>
                 {
                     Response response = new();
-                    using (work100013Context db = new())
+                    string token_headers = Request.Headers["Token"].FirstOrDefault();
+                    string idClient = Request.Headers["IdClient"].FirstOrDefault();
+                    if (token_headers == PersonaleToken.GetToken().Split('.')[1])
                     {
 
-                        var list = from Client in db.Clients
-                                   join Auth in db.Auths on Client.IdClient equals Auth.IdClient
-                                   where Client.IdClient == 43
-                                   select new
-                                   {
-                                       LastName = Client.LastName,
-                                       Name = Client.Name,
-                                       MiddleName = Client.MiddleName,
-                                       DriverNum = Client.NumberDriver,
-                                       Email = Auth.Email,
-                                   };
+                        using (work100013Context db = new())
+                        {
 
-                        response.StatusCode = HttpStatusCode.OK;
-                        response.Headers["Access-Control-Allow-Origin"] = "*";
-                        response.Headers["Access-Control-Allow-Method"] = "Get";
-                        response.Headers["Client"] = System.Text.Json.JsonSerializer.Serialize(list);
-                        response.Headers["Access-Control-Expose-Headers"] = "Client";
-                        return response;
+                            var list = from Client in db.Clients
+                                       join Auth in db.Auths on Client.IdClient equals Auth.IdClient
+                                       where Client.IdClient == Int32.Parse(idClient)
+                                       select new
+                                       {
+                                           LastName = Client.LastName,
+                                           Name = Client.Name,
+                                           MiddleName = Client.MiddleName,
+                                           DriverNum = Client.NumberDriver,
+                                           Email = Auth.Email,
+                                       };
+
+                            response.StatusCode = HttpStatusCode.OK;
+                            response.Headers["Access-Control-Allow-Origin"] = "*";
+                            response.Headers["Access-Control-Allow-Method"] = "Get";
+                            response.Headers["Client"] = System.Text.Json.JsonSerializer.Serialize(list);
+                            response.Headers["Access-Control-Expose-Headers"] = "Client";
+
+                        }
+
                     }
+                    return response;
 
 
                 });
@@ -286,71 +308,85 @@ namespace Server
             });
             Get("/TripInfoClient", (ew) =>
             {
+
                 Response response = new();
-                using (work100013Context db = new())
+                string token_headers = Request.Headers["Token"].FirstOrDefault();
+                string idClient = Request.Headers["IdClient"].FirstOrDefault();
+                if (token_headers == PersonaleToken.GetToken().Split('.')[1])
                 {
-                    try
+                    using (work100013Context db = new())
                     {
-                        var to = from Trip in db.Trips
-                                 join Car in db.Cars on Trip.IdCar equals Car.IdCar
-                                 join Client in db.Clients on Trip.IdClient equals Client.IdClient
-                                 where Client.IdClient == 43 orderby Trip.IdTrip descending
-                                 select new
-                                 {
-                                     IdTrip = Trip.IdTrip,
-                                     StartDate = Convert.ToString(Trip.StartDate),
-                                     EndDate = Convert.ToString(Trip.EndDate),
-                                     NameCar = Car.NameCar,
-                                     NumberCar = Car.NumberCar,
-                                 };
+                        try
+                        {
+                            var to = from Trip in db.Trips
+                                     join Car in db.Cars on Trip.IdCar equals Car.IdCar
+                                     join Client in db.Clients on Trip.IdClient equals Client.IdClient
+                                     where Client.IdClient == Int32.Parse(idClient)
+                                     orderby Trip.IdTrip descending
+                                     select new
+                                     {
+                                         IdTrip = Trip.IdTrip,
+                                         StartDate = Convert.ToString(Trip.StartDate),
+                                         EndDate = Convert.ToString(Trip.EndDate),
+                                         NameCar = Car.NameCar,
+                                         NumberCar = Car.NumberCar,
+                                     };
 
-                        response.StatusCode = HttpStatusCode.OK;
-                        response.Headers["Access-Control-Allow-Origin"] = "*";
-                        response.Headers["Access-Control-Allow-Method"] = "Get";
-                        response.Headers["Info"] = System.Text.Json.JsonSerializer.Serialize(to);
-                        response.Headers["Access-Control-Expose-Headers"] = "Info";
+                            response.StatusCode = HttpStatusCode.OK;
+                            response.Headers["Access-Control-Allow-Origin"] = "*";
+                            response.Headers["Access-Control-Allow-Method"] = "Get";
+                            response.Headers["Info"] = System.Text.Json.JsonSerializer.Serialize(to);
+                            response.Headers["Access-Control-Expose-Headers"] = "Info";
 
-                        return response;
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            return HttpStatusCode.NoResponse;
+                        }
+
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        return HttpStatusCode.NoResponse;
-                    }
-
                 }
+                return response;
 
 
             });
             Get("/Balance", (ew) =>
             {
                 Response response = new();
-                using (work100013Context db = new())
+                string token_headers = Request.Headers["Token"].FirstOrDefault();
+                string idClient = Request.Headers["IdClient"].FirstOrDefault();
+                if (token_headers == PersonaleToken.GetToken().Split('.')[1])
                 {
-                    try
+                    using (work100013Context db = new())
                     {
-                        var balance = from Wallet in db.Wallets
-                                      where Wallet.IdClient == 43
-                                      select new
-                                      {
-                                          Sum = Wallet.Sum
-                                      };
+                        try
+                        {
+                            var balance = from Wallet in db.Wallets
+                                          where Wallet.IdClient == Int32.Parse(idClient)
+                                          select new
+                                          {
+                                              Sum = Wallet.Sum
+                                          };
 
-                        response.StatusCode = HttpStatusCode.OK;
-                        response.Headers["Access-Control-Allow-Origin"] = "*";
-                        response.Headers["Access-Control-Allow-Method"] = "Get";
-                        response.Headers["Balance"] = System.Text.Json.JsonSerializer.Serialize(balance);
-                        response.Headers["Access-Control-Expose-Headers"] = "Balance";
+                            response.StatusCode = HttpStatusCode.OK;
+                            response.Headers["Access-Control-Allow-Origin"] = "*";
+                            response.Headers["Access-Control-Allow-Method"] = "Get";
+                            response.Headers["Balance"] = System.Text.Json.JsonSerializer.Serialize(balance);
+                            response.Headers["Access-Control-Expose-Headers"] = "Balance";
 
-                        return response;
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                            return HttpStatusCode.NoResponse;
+                        }
+
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        return HttpStatusCode.NoResponse;
-                    }
-
                 }
+                return response;
 
 
             });
@@ -397,16 +433,20 @@ namespace Server
             Post("/addTrip", (x) =>
             {
                 Response response = new();
-                x = this.Bind<NewTrip>();
-                using (work100013Context db = new())
+                string token_headers = Request.Headers["Token"].FirstOrDefault();
+                string idClient = Request.Headers["IdClient"].FirstOrDefault();
+                if (token_headers == PersonaleToken.GetToken().Split('.')[1])
                 {
-                    
+                    x = this.Bind<NewTrip>();
+                    using (work100013Context db = new())
+                    {
+
                         Trip trip = new Trip
                         {
-                            StartDate = DateOnly.Parse(x.StartDate), 
+                            StartDate = DateOnly.Parse(x.StartDate),
                             EndDate = DateOnly.Parse(x.EndDate),
                             IdCar = x.IdCar,
-                            IdClient = 43,
+                            IdClient = Int32.Parse(idClient),
                             StatusTrip = true,
                             StatusCar = false
                         };
@@ -423,10 +463,12 @@ namespace Server
                         response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
                         response.Headers["Content-Type"] = "application/json";
 
-                    
-                    return response;
 
+
+
+                    }
                 }
+                return response;
 
             });
         }

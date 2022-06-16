@@ -14,14 +14,14 @@ namespace Server
         MailMessage message;
         SmtpClient smtp;
 
-        public SMTPSender()
+        public SMTPSender(string email)
         {
 
 
             // отправитель - устанавливаем адрес и отображаемое в письме имя
-            from = new MailAddress("nikita19999lol@gmail.com", "Привет");
+            from = new MailAddress("nikita19999lol@gmail.com", "Операция на CoinCar");
             // кому отправляем
-            to = new MailAddress("nikita19999lol@gmail.com");
+            to = new MailAddress(email);
             // создаем объект сообщения
             message = new MailMessage(from, to);
             // тема письма
