@@ -64,7 +64,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Label layoutX="269.0" layoutY="24.0" text="CoinCash" textFill="WHITE">
+      <Label layoutX="269.0" layoutY="24.0" text="CoinCar" textFill="WHITE">
          <font>
             <Font name="Century" size="33.0" />
          </font>
