@@ -13,7 +13,7 @@ namespace Server
         {
             var uri = new Uri("http://localhost:1234");
 
-            HostConfiguration hostConfiguration = new ();
+            HostConfiguration hostConfiguration = new();
             hostConfiguration.UrlReservations.CreateAutomatically = true;
 
 
@@ -124,7 +124,6 @@ namespace Server
                     response.StatusCode = HttpStatusCode.OK;
                     response.Headers["Access-Control-Allow-Origin"] = "*";
                     response.Headers["Access-Control-Allow-Method"] = "POST";
-
                     PersonaleToken.SetToken(idClient + "." + Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
                     response.Headers["Token"] = PersonaleToken.GetToken();
                     response.Headers["Access-Control-Expose-Headers"] = "Token";
@@ -191,10 +190,8 @@ namespace Server
                         response.Headers["Account"] = System.Text.Json.JsonSerializer.Serialize(list1);
                         response.Headers["Access-Control-Expose-Headers"] = "Account";
                     }
-
                 }
                 return response;
-
             });
             Get("/client", (x21) =>
                 {
@@ -218,13 +215,11 @@ namespace Server
                                            DriverNum = Client.NumberDriver,
                                            Email = Auth.Email,
                                        };
-
                             response.StatusCode = HttpStatusCode.OK;
                             response.Headers["Access-Control-Allow-Origin"] = "*";
                             response.Headers["Access-Control-Allow-Method"] = "Get";
                             response.Headers["Client"] = System.Text.Json.JsonSerializer.Serialize(list);
                             response.Headers["Access-Control-Expose-Headers"] = "Client";
-
                         }
 
                     }
@@ -293,7 +288,6 @@ namespace Server
                         response.Headers["Access-Control-Allow-Method"] = "Get";
                         response.Headers["Tech"] = System.Text.Json.JsonSerializer.Serialize(to);
                         response.Headers["Access-Control-Expose-Headers"] = "Tech";
-
                         return response;
                     }
                     catch (Exception ex)
@@ -301,14 +295,12 @@ namespace Server
                         Console.WriteLine(ex.Message);
                         return HttpStatusCode.NoResponse;
                     }
-
                 }
 
 
             });
             Get("/TripInfoClient", (ew) =>
             {
-
                 Response response = new();
                 string token_headers = Request.Headers["Token"].FirstOrDefault();
                 string idClient = Request.Headers["IdClient"].FirstOrDefault();
@@ -322,7 +314,7 @@ namespace Server
                                      join Car in db.Cars on Trip.IdCar equals Car.IdCar
                                      join Client in db.Clients on Trip.IdClient equals Client.IdClient
                                      where Client.IdClient == Int32.Parse(idClient)
-                                     orderby Trip.IdTrip descending
+                                     orderby Trip.StartDate 
                                      select new
                                      {
                                          IdTrip = Trip.IdTrip,
@@ -337,21 +329,17 @@ namespace Server
                             response.Headers["Access-Control-Allow-Method"] = "Get";
                             response.Headers["Info"] = System.Text.Json.JsonSerializer.Serialize(to);
                             response.Headers["Access-Control-Expose-Headers"] = "Info";
-
-
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
                             return HttpStatusCode.NoResponse;
                         }
-
                     }
                 }
                 return response;
-
-
             });
+
             Get("/Balance", (ew) =>
             {
                 Response response = new();
@@ -375,20 +363,15 @@ namespace Server
                             response.Headers["Access-Control-Allow-Method"] = "Get";
                             response.Headers["Balance"] = System.Text.Json.JsonSerializer.Serialize(balance);
                             response.Headers["Access-Control-Expose-Headers"] = "Balance";
-
-
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
                             return HttpStatusCode.NoResponse;
                         }
-
                     }
                 }
                 return response;
-
-
             });
             Post("/Trip", (x) => //добавить отпрвку чека
             {
@@ -412,21 +395,18 @@ namespace Server
                         response.StatusCode = HttpStatusCode.OK;
                         response.Headers["Access-Control-Allow-Origin"] = "*";
                         response.Headers["Access-Control-Allow-Method"] = "POST";
-
                         string myToken = "lalala.somestring.secretword";
                         response.Headers["Token"] = myToken;
                         response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
                         response.Headers["Content-Type"] = "application/json";
                         response.Headers["Trip"] = System.Text.Json.JsonSerializer.Serialize(list);
                         response.Headers["Access-Control-Expose-Headers"] = "Trip";
-
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
                     return response;
-
                 }
 
             });
@@ -453,23 +433,16 @@ namespace Server
                         db.Trips.Add(trip);
                         db.SaveChanges();
 
-
                         response.StatusCode = HttpStatusCode.OK;
                         response.Headers["Access-Control-Allow-Origin"] = "*";
                         response.Headers["Access-Control-Allow-Method"] = "POST";
-
                         string myToken = "lalala.somestring.secretword";
                         response.Headers["Token"] = myToken;
                         response.Headers["Access-Control-Expose-Headers"] = "Token, Account";
                         response.Headers["Content-Type"] = "application/json";
-
-
-
-
                     }
                 }
                 return response;
-
             });
         }
     }

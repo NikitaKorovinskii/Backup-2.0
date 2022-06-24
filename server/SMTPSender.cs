@@ -77,31 +77,5 @@ namespace Server
             }
             
         }
-
-        public void SendPDF()
-        {
-            message.Subject = "Олег";
-            message.Body = "Првиет!";
-
-            message.Attachments.Add(new Attachment("D:\\PAY.pdf"));
-
-            smtp.Send(message);
-        }
-
-        public void SendHTML()
-        {
-            message.Subject = "HTML письмо";
-
-            var mesText = new StringBuilder("Это опять я. Смотри, какая таблица получилась." + Environment.NewLine);
-            mesText.Append("<table style=\"border-collapse: collapse\">" + Environment.NewLine);
-            mesText.Append("<tr><th>Это</th><th>просто</th><th>интересная</th><th>таблица</th></tr>" + Environment.NewLine);
-            mesText.Append("<tr><th>Мама,</th><th>я</th><th>в</th><th>отчете!</th></tr>" + Environment.NewLine);
-            mesText.Append("</table>");
-
-            message.Body = mesText.ToString();
-            message.IsBodyHtml = true;
-
-            smtp.Send(message);
-        }
     }
 }
